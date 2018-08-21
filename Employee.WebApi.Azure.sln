@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.WebApi.Azure", "Em
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.WebApi.Azure.DataAccess", "Employee.WebApi.Azure.DataAccess\Employee.WebApi.Azure.DataAccess.csproj", "{2FFC96D3-FA38-4FCB-B8A6-1E7424C85F09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.WebApi.Azure.Models", "Employee.WebApi.Azure.Models\Employee.WebApi.Azure.Models.csproj", "{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.WebApi.Azure.Tests", "Employee.WebApi.Azure.Tests\Employee.WebApi.Azure.Tests.csproj", "{34251A92-37D4-4D65-A03C-F8C2BA81505A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2FFC96D3-FA38-4FCB-B8A6-1E7424C85F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFC96D3-FA38-4FCB-B8A6-1E7424C85F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFC96D3-FA38-4FCB-B8A6-1E7424C85F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34251A92-37D4-4D65-A03C-F8C2BA81505A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34251A92-37D4-4D65-A03C-F8C2BA81505A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34251A92-37D4-4D65-A03C-F8C2BA81505A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34251A92-37D4-4D65-A03C-F8C2BA81505A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

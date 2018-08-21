@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Employee.WebApi.Azure\Employee.WebApi.Azure.csproj">
-      <Project>{0A683E26-A78F-4811-8913-FB587B5DCDB6}</Project>
-      <Name>Employee.WebApi.Azure</Name>
+    <ProjectReference Include="..\Employee.WebApi.Azure.Models\Employee.WebApi.Azure.Models.csproj">
+      <Project>{C97B5AA5-0E2A-4D32-ABA2-ACEC3ADFF26C}</Project>
+      <Name>Employee.WebApi.Azure.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
