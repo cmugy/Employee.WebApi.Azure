@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Employee.WebApi.Azure.DataAccess;
+using Employee.WebApi.Azure.Services;
 using Employee = Employee.WebApi.Azure.Models.Employee;
 
 namespace Employee.WebApi.Azure.Controllers
@@ -13,25 +14,18 @@ namespace Employee.WebApi.Azure.Controllers
     {
         private IEmployeeDataService _employeeDataService = new EmployeeDataService(); // todo use container
 
-        public EmployeeController(IEmployeeDataService employeeDataService)
-        {
-            _employeeDataService = employeeDataService;
-        }
+        
          
         [HttpGet, Route("api/employees")]
         public IEnumerable<Models.Employee> GetAllEmployees()
         {
-            return new List<Models.Employee>
-            {
-                new Models.Employee
-                {
-                    Id = 1,
-                    FirstName = "Collins",
-                    LastName = "Mugarura",
-                    Salary = 43000,
-                    StartDate = new DateTime(2017, 11,09)
-                }
-            };
+            var employees = _employeeDataService.GetEmployees();
+
+            return employees;
+        }
+
+        public EmployeeController(ILogProvider logProvider) : base(logProvider)
+        {
         }
     }
 }

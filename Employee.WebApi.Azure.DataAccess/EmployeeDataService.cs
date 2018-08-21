@@ -10,7 +10,17 @@ namespace Employee.WebApi.Azure.DataAccess
     {
         public IEnumerable<Models.Employee> GetEmployees()
         {
-            throw new NotImplementedException();
+            return new List<Models.Employee>
+            {
+                new Models.Employee
+                {
+                    Id = 1,
+                    FirstName = "Collins",
+                    LastName = "Mugarura",
+                    Salary = 43000,
+                    StartDate = new DateTime(2017, 11,09)
+                }
+            };
         }
 
         public Models.Employee GetEmployeeById(int id)
