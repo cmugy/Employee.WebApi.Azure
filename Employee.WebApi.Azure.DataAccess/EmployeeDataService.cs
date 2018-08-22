@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,17 +12,57 @@ namespace Employee.WebApi.Azure.DataAccess
     {
         public IEnumerable<Models.Employee> GetEmployees()
         {
-            return new List<Models.Employee>
+            var connectionString = ConfigurationManager.AppSettings.Get("connectionString");
+
+            var employees= new List<Models.Employee>();
+
+            try
             {
-                new Models.Employee
+
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    Id = 1,
-                    FirstName = "Collins",
-                    LastName = "Mugarura",
-                    Salary = 43000,
-                    StartDate = new DateTime(2017, 11,09)
+                    var command = new SqlCommand("select * from Employee", connection);
+
+                    connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var employee = new Models.Employee
+                        {
+                            Id = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            Salary = (decimal) reader.GetDouble(3),
+                            StartDate = reader.GetDateTime(4)
+                        };
+
+                        employees.Add(employee);
+                    }
+
+
                 }
-            };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            //return new List<Models.Employee>
+            //{
+            //    new Models.Employee
+            //    {
+            //        Id = 1,
+            //        FirstName = "Collins",
+            //        LastName = "Mugarura",
+            //        Salary = 43000,
+            //        StartDate = new DateTime(2017, 11,09)
+            //    }
+            //};
+            return employees;
+
         }
 
         public Models.Employee GetEmployeeById(int id)
