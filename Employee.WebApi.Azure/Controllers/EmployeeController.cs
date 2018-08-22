@@ -27,5 +27,13 @@ namespace Employee.WebApi.Azure.Controllers
         {
             _employeeDataService = employeeDataService;
         }
+
+        [HttpGet, Route("api/employees/{id}")]
+        public Models.Employee GetEmployeeById(int id)
+        {
+            log.InfoFormat("Received request to get employee {0}", id);
+
+            return _employeeDataService.GetEmployeeById(id);
+        }
     }
 }
