@@ -6,16 +6,15 @@ using System.Net.Http;
 using System.Web.Http;
 using Employee.WebApi.Azure.DataAccess;
 using Employee.WebApi.Azure.Services;
-using Employee = Employee.WebApi.Azure.Models.Employee;
+//using Employee = Employee.WebApi.Azure.Models.Employee;
 
 namespace Employee.WebApi.Azure.Controllers
 {
     public class EmployeeController : ControllerBase
     {
-        private IEmployeeDataService _employeeDataService = new EmployeeDataService(); // todo use container
+        private readonly IEmployeeDataService _employeeDataService;
 
-        
-         
+                
         [HttpGet, Route("api/employees")]
         public IEnumerable<Models.Employee> GetAllEmployees()
         {
@@ -24,8 +23,9 @@ namespace Employee.WebApi.Azure.Controllers
             return employees;
         }
 
-        public EmployeeController(ILogProvider logProvider) : base(logProvider)
+        public EmployeeController(ILogProvider logProvider, IEmployeeDataService employeeDataService) : base(logProvider)
         {
+            _employeeDataService = employeeDataService;
         }
     }
 }
