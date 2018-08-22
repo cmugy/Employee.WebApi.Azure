@@ -21,6 +21,8 @@ namespace Employee.WebApi.Azure.DataAccess
 
                 using (var connection = new SqlConnection(connectionString))
                 {
+
+                    //todo use stored procedure SQL inject??
                     var command = new SqlCommand("select * from Employee", connection);
 
                     connection.Open();
