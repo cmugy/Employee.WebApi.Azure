@@ -69,7 +69,7 @@ namespace Employee.WebApi.Azure.DataAccess
 
         public Models.Employee GetEmployeeById(int id)
         {
-            throw new NotImplementedException("Connect to Azure db here");
+            return GetEmployees().FirstOrDefault(p => p.Id == id);
         }
 
         public void AddNewEmployee(Models.Employee employee)
