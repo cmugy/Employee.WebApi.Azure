@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Employee.WebApi.Azure.DataAccess;
 using Employee.WebApi.Azure.Services;
 //using Employee = Employee.WebApi.Azure.Models.Employee;
 
 namespace Employee.WebApi.Azure.Controllers
 {
+    [EnableCors(headers:"*",origins:"*", methods:"*")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeDataService _employeeDataService;

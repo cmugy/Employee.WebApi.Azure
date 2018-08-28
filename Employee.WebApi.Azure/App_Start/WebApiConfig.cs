@@ -15,6 +15,8 @@ namespace Employee.WebApi.Azure
         {
             // Web API configuration and services
 
+            config.EnableCors();
+
             var container = new UnityContainer();
 
             container.RegisterType<ILogProvider, LogProvider>();
