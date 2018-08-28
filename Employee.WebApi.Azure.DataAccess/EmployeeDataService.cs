@@ -43,7 +43,7 @@ namespace Employee.WebApi.Azure.DataAccess
                         employees.Add(employee);
                     }
 
-
+                    connection.Close();
                 }
             }
             catch (Exception e)
@@ -69,12 +69,42 @@ namespace Employee.WebApi.Azure.DataAccess
 
         public Models.Employee GetEmployeeById(int id)
         {
-            return GetEmployees().FirstOrDefault(p => p.Id == id);
+            try
+            {
+                return GetEmployees().FirstOrDefault(p => p.Id == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public void AddNewEmployee(Models.Employee employee)
         {
-            throw new NotImplementedException();
+            var connectionString = ConfigurationManager.AppSettings.Get("connectionString");
+            var data = $"\'{employee.FirstName}\', \'{employee.LastName}\', \'{employee.Salary}\', \'{employee.StartDate:yyyy-MM-dd}\'";
+            var query = "INSERT INTO Employee (FirstName, LastName, Salary, StartDate)" + "VALUES (" + data + ")";
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    var command = new SqlCommand(query, connection);
+
+                    connection.Open();
+
+                    var i = command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void DeleteEmployeeById(int id)

@@ -37,5 +37,13 @@ namespace Employee.WebApi.Azure.Controllers
 
             return _employeeDataService.GetEmployeeById(id);
         }
+
+        [HttpPost, Route("api/employee/add")]
+        public void AddEmployee([FromBody] Models.Employee employee)
+        {
+            log.InfoFormat("Received request to add employee");
+
+            _employeeDataService.AddNewEmployee(employee);
+        }
     }
 }
