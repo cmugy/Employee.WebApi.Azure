@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -91,7 +92,19 @@ namespace Employee.WebApi.Azure.DataAccess
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    var command = new SqlCommand(query, connection);
+                    var command = new SqlCommand("insertNewemployee", connection)
+                    {
+                        CommandType = CommandType.StoredProcedure,
+                        Parameters =
+                        {
+                            new SqlParameter("@firstName", employee.FirstName),
+                            new SqlParameter("@lastName", employee.LastName),
+                            new SqlParameter("@salary", employee.Salary),
+                            new SqlParameter("@startDate", employee.StartDate)
+                        }
+
+                    };
+
 
                     connection.Open();
 
