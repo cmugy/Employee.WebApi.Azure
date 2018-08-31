@@ -48,7 +48,7 @@ namespace Employee.WebApi.Azure.Tests
 
             var employee = controller.GetEmployeeById(It.IsAny<int>());
 
-            _employeeDataServiceMock.Verify(x=>x.GetEmployeeById(It.IsAny<int>()), Times.Once);
+            _employeeDataServiceMock.Verify(x => x.GetEmployeeById(It.IsAny<int>()), Times.Once);
 
         }
 
