@@ -52,5 +52,15 @@ namespace Employee.WebApi.Azure.Tests
 
         }
 
+        [Test]
+        public void DeleteEmployeeGivenIdTest()
+        {
+            var controller = GetController();
+
+            controller.DeleteEmployeeGivenId(It.IsAny<int>());
+
+            _employeeDataServiceMock.Verify(x => x.DeleteEmployeeById(It.IsAny<int>()), Times.Once);
+        }
+
     }
 }

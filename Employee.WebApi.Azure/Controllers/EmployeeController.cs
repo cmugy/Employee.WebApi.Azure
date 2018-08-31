@@ -45,5 +45,13 @@ namespace Employee.WebApi.Azure.Controllers
 
             _employeeDataService.AddNewEmployee(employee);
         }
+
+        [HttpDelete, Route("api/employee/delete/{id}")]
+        public void DeleteEmployeeGivenId(int id)
+        {
+            log.InfoFormat("Received request to delete employee with id {0}", id);
+
+            _employeeDataService.DeleteEmployeeById(id);
+        }
     }
 }

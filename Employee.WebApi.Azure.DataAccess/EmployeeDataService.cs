@@ -32,13 +32,15 @@ namespace Employee.WebApi.Azure.DataAccess
 
                     while (reader.Read())
                     {
+                        var idOrdinal = reader.GetOrdinal("ID");
                         var employee = new Models.Employee
                         {
-                            Id = reader.GetInt32(0),
-                            FirstName = reader.GetString(1),
-                            LastName = reader.GetString(2),
-                            Salary = (decimal) reader.GetDouble(3),
-                            StartDate = reader.GetDateTime(4)
+                            Id = reader.GetInt32(4),
+                            FirstName = reader.GetString(0),
+                            LastName = reader.GetString(1),
+                            Salary = (decimal) reader.GetDouble(2),
+                            StartDate = reader.GetDateTime(3),
+                            
                         };
 
                         employees.Add(employee);
@@ -85,8 +87,8 @@ namespace Employee.WebApi.Azure.DataAccess
         public void AddNewEmployee(Models.Employee employee)
         {
             var connectionString = ConfigurationManager.AppSettings.Get("connectionString");
-            var data = $"\'{employee.FirstName}\', \'{employee.LastName}\', \'{employee.Salary}\', \'{employee.StartDate:yyyy-MM-dd}\'";
-            var query = "INSERT INTO Employee (FirstName, LastName, Salary, StartDate)" + "VALUES (" + data + ")";
+            //var data = $"\'{employee.FirstName}\', \'{employee.LastName}\', \'{employee.Salary}\', \'{employee.StartDate:yyyy-MM-dd}\'";
+            //var query = "INSERT INTO Employee (FirstName, LastName, Salary, StartDate)" + "VALUES (" + data + ")";
 
             try
             {
@@ -122,7 +124,32 @@ namespace Employee.WebApi.Azure.DataAccess
 
         public void DeleteEmployeeById(int id)
         {
-            throw new NotImplementedException();
+            //todo this can be moved from here
+            var connectionString = ConfigurationManager.AppSettings.Get("connectionString");
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    var command = new SqlCommand("deleteEmployeeById", connection)
+                    {
+                        CommandType = CommandType.StoredProcedure,
+                        Parameters = { new SqlParameter("@id", id)}
+                    };
+
+                    connection.Open();
+
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
